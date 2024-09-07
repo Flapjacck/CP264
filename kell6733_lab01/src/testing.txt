@@ -1,0 +1,50 @@
+/**
+ * -------------------------------------
+ * @file  testing.txt
+ * Lab 1 Test Results File
+ * -------------------------------------
+ * @author name, id, email
+ *
+ * @version 2024-01-05
+ *
+ * -------------------------------------
+ */
+Results:
+
+-------------------------------------
+No command line parameters
+Program Parameters:
+
+  No user parameters specified.
+
+  Argument 0 is a system default, and is always passed to the main program.
+  Argument 0 is the path and name of the executable file.
+
+  argc: 1
+  argv[0] = "C:\Users\plkel\Documents\!Main CP264\CP264\kell6733_lab01\Debug\kell6733_lab01.exe"
+
+
+-------------------------------------
+A command line with parameters A 1 "some strings"
+Program Parameters:
+
+  argc: 4
+
+  argv[0] = "C:\Users\plkel\Documents\!Main CP264\CP264\kell6733_lab01\Debug\kell6733_lab01.exe"
+  argv[1] = "A"
+  argv[2] = "1"
+  argv[3] = "some strings"
+
+
+-------------------------------------
+A command line with parameters B 2 some strings
+Program Parameters:
+
+  argc: 5
+
+  argv[0] = "C:\Users\plkel\Documents\!Main CP264\CP264\kell6733_lab01\Debug\kell6733_lab01.exe"
+  argv[1] = "B"
+  argv[2] = "2"
+  argv[3] = "some"
+  argv[4] = "strings"
+
