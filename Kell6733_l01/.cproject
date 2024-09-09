@@ -97,15 +97,7 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="kell6733_lab01.cdt.managedbuild.target.gnu.mingw.exe.132836746" name="Executable" projectType="cdt.managedbuild.target.gnu.mingw.exe"/>
 	</storageModule>
-	<storageModule moduleId="scannerConfiguration">
-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.debug.1255167420;cdt.managedbuild.config.gnu.mingw.exe.debug.1255167420.;cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.debug.1709178362;cdt.managedbuild.tool.gnu.c.compiler.input.1866235622">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.release.416275630;cdt.managedbuild.config.gnu.mingw.exe.release.416275630.;cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.release.1073691720;cdt.managedbuild.tool.gnu.c.compiler.input.786413220">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
+	<storageModule moduleId="scannerConfiguration"/>
 </cproject>
