@@ -1,12 +1,64 @@
 /**
  * -------------------------------------
  * @file  testing.txt
- * Assignment 1 Sample Test Results
+ * Lab 3 Test Results File
  * -------------------------------------
  * @author Spencer Kelly, 169066733, kell6733@mylaurier.ca
  *
- * @version 2023-09-07
+ * @version 2024-01-25
  *
  * -------------------------------------
  */
- 
+------------------
+Task 1
+Square footage: 100000.00 sq ft is equivalent to 2.30 acres
+It will take 20 minutes to mow a 10.00 x 10.00 lawn at 5.00 sq ft per minute
+
+
+
+------------------
+Task 2
+Square footage: 100000.00 sq ft is equivalent to 2.30 acres
+It will take 20 minutes to mow a 10.00 x 10.00 lawn at 5.00 sq ft per minute
+The converted date is: 19621025
+It will take 03 seconds for an object to fall 50 meters
+
+----------------------------------
+Task 3
+Square footage: 100000.00 sq ft is equivalent to 2.30 acres
+It will take 20 minutes to mow a 10.00 x 10.00 lawn at 5.00 sq ft per minute
+The converted date is: 19621025
+It will take 03 seconds for an object to fall 50 meters
+The hypotenuse of a right triangle with sides 3.00 and 4.00 is 5.00
+
+---------------
+Task 4
+Square footage: 100000.00 sq ft is equivalent to 2.30 acres
+It will take 20 minutes to mow a 10.00 x 10.00 lawn at 5.00 sq ft per minute
+The converted date is: 19621025
+It will take 03 seconds for an object to fall 50 meters
+The hypotenuse of a right triangle with sides 3.00 and 4.00 is 5.00
+The sum of even numbers from 1 to 100 is 2550
+
+---------------
+Task 5
+Square footage: 100000.00 sq ft is equivalent to 2.30 acres
+It will take 20 minutes to mow a 10.00 x 10.00 lawn at 5.00 sq ft per minute
+The converted date is: 19621025
+It will take 03 seconds for an object to fall 50 meters
+The hypotenuse of a right triangle with sides 3.00 and 4.00 is 5.00
+The sum of even numbers from 1 to 100 is 2550
+The sum of the first 4 terms of the harmonic series is 2.083333
+
+--------------
+Task 6
+Square footage: 100000.00 sq ft is equivalent to 2.30 acres
+It will take 20 minutes to mow a 10.00 x 10.00 lawn at 5.00 sq ft per minute
+The converted date is: 19621025
+It will take 03 seconds for an object to fall 50 meters
+The hypotenuse of a right triangle with sides 3.00 and 4.00 is 5.00
+The sum of even numbers from 1 to 100 is 2550
+The sum of the first 4 terms of the harmonic series is 2.083333
+It will take 29 year(s) for a population of 10 to grow to 100 with a growth rate of 10.00
+
+
