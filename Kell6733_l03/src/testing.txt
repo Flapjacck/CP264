@@ -1,0 +1,40 @@
+/**
+ * -------------------------------------
+ * @file  testing.txt
+ * Lab 3 Test Results File
+ * -------------------------------------
+ * @author Spencer Kelly, 169066733, kell6733@mylaurier.ca
+ *
+ * @version 2024-01-25
+ *
+ * -------------------------------------
+ */
+------------------
+Task 1
+Test: sum_integers
+
+Enter integers, one per line: 
+1
+2
+3 3 
+q
+Sum: 6
+
+
+
+------------------
+Task 2
+Test: sum_three_integers
+
+Enter three integers separated by commas: 1,2,one
+The integers were not properly entered.
+Enter three integers separated by commas: 1,2
+The integers were not properly entered.
+Enter three integers separated by commas: 1,2,3,4
+Sum: 6
+
+
+---------------
+Task 3
+
+
