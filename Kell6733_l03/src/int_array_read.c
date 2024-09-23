@@ -10,6 +10,7 @@
  * -------------------------------------
  */
 #include "functions.h"
+#include <string.h>
 
 void int_array_read(int *array, int size) {
 

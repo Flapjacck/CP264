@@ -1,0 +1,30 @@
+/**
+ * -------------------------------------
+ * @file  testing.txt
+ * Lab 4 Test Results File
+ * -------------------------------------
+ * @author Spencer Kelly, 169066733, kell6733@mylaurier.ca
+ *
+ * @version 2024-02-03
+ *
+ * -------------------------------------
+ */
+ 
+ Test 1:
+ ------------------------
+Test read_strings
+
+lines read: 0
+
+Contents of string array
+------------------------
+
+------------------------
+Test strings_with_substring
+
+Enter substring: first
+------------------------
+Test strings_length
+
+Enter the length comparison value: 12
+ 
