@@ -1,0 +1,11 @@
+/**
+ * -------------------------------------
+ * @file  sample_tests.txt
+ * Assignment 2 sample testing
+ * -------------------------------------
+ * @author Spencer Kelly, 169066733, kell6733@mylaurier.ca
+ *
+ * @version 2024-09-13
+ *
+ * -------------------------------------
+ */
