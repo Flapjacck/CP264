@@ -38,6 +38,7 @@ void movie_copy(const movie_struct *source, movie_struct *target) {
 	// Copy each field from the source to the target
 	strcpy(target->title, source->title);
 	strcpy(target->director, source->director);
+	//pointers to the strings in the struct so we can copy the strings
 	target->year = source->year;
 	target->genre = source->genre;
 	target->rating = source->rating;
@@ -47,18 +48,44 @@ void movie_copy(const movie_struct *source, movie_struct *target) {
 int movie_compare(const movie_struct *source, const movie_struct *target) {
 
 	// your code here
+	// Compare the titles of the two movies
+	int title_comparison = strcmp(source->title, target->title);
+
+	// If the titles are the same, compare the years
+	if (title_comparison == 0) {
+		return source->year - target->year;
+	}
+
+	// Otherwise, return the result of the title comparison
+	return title_comparison;
 
 }
 
 void movie_print(const movie_struct *source) {
 
 	// your code here
+	// Print the title, year, director, rating and genre of the movie
+	assert(source != NULL);
+
+	printf("Title:    %s\n", source->title);
+	printf("Year:     %d\n", source->year);
+	printf("Director: %s\n", source->director);
+	printf("Genres:   %s\n", GENRES[source->genre]);
+	printf("Rating:   %.1f\n", source->rating);
 
 }
 
 char* movie_key(char *str, size_t max_length, movie_struct *source) {
 
 	// your code here
+	if (str == NULL || source == NULL) {
+		return NULL;
+	}
+
+	// Format the string as "title, year"
+	snprintf(str, max_length, "%s, %d", source->title, source->year);
+
+	return str;
 
 }
 
@@ -67,7 +94,7 @@ void genres_menu() {
 	// your code here
 	int i;
 	for (i = 0; i < GENRES_COUNT; i++) {
-		printf("%d. %s\n", i + 1, GENRES[i]);
+		printf("%d. %s\n", i, GENRES[i]);
 	}
 
 }

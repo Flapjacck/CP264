@@ -9,3 +9,77 @@
  *
  * -------------------------------------
  */
+ 
+ Test: genres_menu()
+
+0. science fiction
+1. fantasy
+2. drama
+3. romance
+4. comedy
+5. zombie
+6. action
+7. historical
+8. horror
+9. war
+10. mystery
+-------------------------------------------
+Test: movie_init(&source, "Dark City", 1998, "Alex Proyas", 0, 7.8)
+
+Test: movie_print(source):
+
+Title:    Dark City
+Year:     1998
+Director: Alex Proyas
+Genres:   science fiction
+Rating:   7.8
+-------------------------------------------
+Test: movie_copy(&source, &target):
+
+-------------------------------------------
+Test: movie_print(&target):
+
+Title:    Dark City
+Year:     1998
+Director: Alex Proyas
+Genres:   science fiction
+Rating:   7.8
+-------------------------------------------
+Test: read_movie(&source, "Zulu|1964|Cy Endfield|7.8|9"):
+
+Test: movie_print(&source):
+
+Title:    Zulu
+Year:     1964
+Director: Cy Endfield
+Genres:   war
+Rating:   7.8
+-------------------------------------------
+Test: result = movie_compare(&source, &source):
+result: 0
+Test: result = movie_compare(&source, &target):
+result: 1
+Test: result = movie_compare(&target, &source):
+result: -1
+-------------------------------------------
+Test: movie_key(&source):
+
+Zulu, 1964
+-------------------------------------------
+Test: get_movie(&source):
+
+Enter movie title: dragon
+Enter movie director: steve
+Enter movie year: 2000
+Enter movie genre: 5
+Enter movie rating: 3.4
+
+Title:    dragon
+Year:     2000
+Director: steve
+Genres:   zombie
+Rating:   3.4
+-------------------------------------------
+Test: result = movie_compare(&source, &target):
+result: 1
+ 
