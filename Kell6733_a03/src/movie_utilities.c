@@ -15,20 +15,20 @@ void get_movie(movie_struct *source) {
 
 	// your code here
 	// Prompt the user for the movie's title, director, year, and genre
-	printf("Enter movie title: ");
+	printf("Title: ");
 	scanf("%s", source->title);
 
-	printf("Enter movie director: ");
-	scanf("%s", source->director);
-
-	printf("Enter movie year: ");
+	printf("Year: ");
 	scanf("%d", &(source->year));
 
-	void genres_menu();
-	printf("Enter movie genre: ");
+	printf("Director: ");
+	scanf("%s", source->director);
+
+	genres_menu();
+	printf("Genre: ");
 	scanf("%d", &(source->genre));
 
-	printf("Enter movie rating: ");
+	printf("Rating: ");
 	scanf("%f", &(source->rating));
 }
 

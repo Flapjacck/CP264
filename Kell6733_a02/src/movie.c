@@ -92,9 +92,11 @@ char* movie_key(char *str, size_t max_length, movie_struct *source) {
 void genres_menu() {
 
 	// your code here
+	printf("Genres\n");
+
 	int i;
 	for (i = 0; i < GENRES_COUNT; i++) {
-		printf("%d. %s\n", i, GENRES[i]);
+		printf("%d: %s\n", i, GENRES[i]);
 	}
 
 }
