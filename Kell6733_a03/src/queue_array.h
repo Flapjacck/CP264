@@ -29,11 +29,11 @@
  * queue structure.
  */
 typedef struct {
-    int capacity;                // capacity of the queue.
-    int count;                   // count of items in queue.
-    int front;                   // index of front item of the queue.
-    int rear;                    // index of rear item of the queue.
-    data_type items[QUEUE_INIT]; // array of data items.
+	int capacity;                // capacity of the queue.
+	int count;                   // count of items in queue.
+	int front;                   // index of front item of the queue.
+	int rear;                    // index of rear item of the queue.
+	data_type items[QUEUE_INIT]; // array of data items.
 } queue_struct;
 
 /**
