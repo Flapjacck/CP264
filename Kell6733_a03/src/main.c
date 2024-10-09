@@ -74,6 +74,7 @@ void test_stack_movie() {
 	movie_array_struct movies;
 	FILE *fp = fopen("movies.txt", "r");
 	read_movies(&movies, fp);
+	printf("test");
 	fclose(fp);
 	test_stack_generic(movies.items, movies.count);
 }

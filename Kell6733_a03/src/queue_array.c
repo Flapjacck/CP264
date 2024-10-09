@@ -3,7 +3,7 @@
  * @file  queue_array.c
  * queue_array Source Code File
  * -------------------------------------
- * @author your name, your id, your email
+ * @author Spencer Kelly, 169066733, kell6733@mylaurier.ca
  *
  * @version 2024-09-28
  *

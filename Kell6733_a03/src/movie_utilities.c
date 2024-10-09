@@ -31,7 +31,6 @@ void get_movie(movie_struct *source) {
 	printf("Rating: ");
 	scanf("%f", &(source->rating));
 }
-
 void read_movie(movie_struct *source, const char *line) {
 
 	// your code here
