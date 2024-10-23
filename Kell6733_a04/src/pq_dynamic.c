@@ -17,6 +17,11 @@
 void pq_initialize(pq_dynamic_struct **source, int capacity) {
 
 	// your code here
+	*source = (pq_dynamic_struct*) malloc(sizeof(pq_dynamic_struct));
+	(*source)->capacity = capacity;
+	(*source)->count = 0;
+	(*source)->first = -1;
+	(*source)->items = (data_type*) malloc(capacity * sizeof(data_type));
 
 }
 
@@ -24,6 +29,9 @@ void pq_initialize(pq_dynamic_struct **source, int capacity) {
 void pq_destroy(pq_dynamic_struct **source) {
 
 	// your code here
+	free((*source)->items);
+	free(*source);
+	*source = NULL;
 
 }
 
@@ -31,6 +39,7 @@ void pq_destroy(pq_dynamic_struct **source) {
 bool pq_empty(const pq_dynamic_struct *source) {
 
 	// your code here
+	return source->count == 0;
 
 }
 
@@ -43,6 +52,7 @@ bool pq_full(const pq_dynamic_struct *source) {
 int pq_count(const pq_dynamic_struct *source) {
 
 	// your code here
+	return source->count;
 
 }
 
@@ -50,6 +60,15 @@ int pq_count(const pq_dynamic_struct *source) {
 bool pq_insert(pq_dynamic_struct *source, data_type *item) {
 
 	// your code here
+	if (pq_full(source)) {
+		return false;
+	}
+	source->items[source->count++] = *item;
+	// Update the first index if necessary
+	if (source->first == -1 || *item < source->items[source->first]) {
+		source->first = source->count - 1;
+	}
+	return true;
 
 }
 
@@ -57,6 +76,11 @@ bool pq_insert(pq_dynamic_struct *source, data_type *item) {
 bool pq_peek(const pq_dynamic_struct *source, data_type *item) {
 
 	// your code here
+	if (pq_empty(source)) {
+		return false;
+	}
+	*item = source->items[source->first];
+	return true;
 
 }
 
@@ -64,6 +88,27 @@ bool pq_peek(const pq_dynamic_struct *source, data_type *item) {
 bool pq_remove(pq_dynamic_struct *source, data_type *item) {
 
 	// your code here
+	if (pq_empty(source)) {
+		return false;
+	}
+	*item = source->items[source->first];
+	// Shift items to fill the gap
+	for (int i = source->first; i < source->count - 1; i++) {
+		source->items[i] = source->items[i + 1];
+	}
+	source->count--;
+	// Update the first index
+	if (source->count == 0) {
+		source->first = -1;
+	} else {
+		source->first = 0;
+		for (int i = 1; i < source->count; i++) {
+			if (source->items[i] < source->items[source->first]) {
+				source->first = i;
+			}
+		}
+	}
+	return true;
 
 }
 

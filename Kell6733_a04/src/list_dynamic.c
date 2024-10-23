@@ -35,6 +35,16 @@ static int list_linear_search(const list_dynamic_struct *source,
 		const data_type *key) {
 
 	// your code here
+	// Iterate through each item in the list
+	for (int i = 0; i < source->count; i++) {
+		// Compare the current item with the key
+		if (data_compare(&(source->items[i]), key) == 0) {
+			// If a match is found, return the index
+			return i;
+		}
+	}
+	// If no match is found, return -1
+	return -1;
 
 }
 
@@ -44,13 +54,19 @@ static int list_linear_search(const list_dynamic_struct *source,
 void list_initialize(list_dynamic_struct **source, int capacity) {
 
 	// your code here
-
+	*source = (list_dynamic_struct*) malloc(sizeof(list_dynamic_struct));
+	(*source)->capacity = capacity;
+	(*source)->count = 0;
+	(*source)->items = (data_type*) malloc(capacity * sizeof(data_type));
 }
 
 // Destroys a list.
 void list_destroy(list_dynamic_struct **source) {
 
 	// your code here
+	free((*source)->items);
+	free(*source);
+	*source = NULL;
 
 }
 
@@ -58,6 +74,7 @@ void list_destroy(list_dynamic_struct **source) {
 bool list_empty(const list_dynamic_struct *source) {
 
 	// your code here
+	return source->count == 0;
 
 }
 
@@ -70,6 +87,11 @@ bool list_full(const list_dynamic_struct *source) {
 bool list_append(list_dynamic_struct *source, data_type *item) {
 
 	// your code here
+	if (list_full(source)) {
+		return false;
+	}
+	source->items[source->count++] = *item;
+	return true;
 
 }
 
@@ -77,6 +99,7 @@ bool list_append(list_dynamic_struct *source, data_type *item) {
 int list_count(const list_dynamic_struct *source) {
 
 	// your code here
+	return source->count;
 
 }
 
@@ -84,6 +107,15 @@ int list_count(const list_dynamic_struct *source) {
 bool list_insert(list_dynamic_struct *source, data_type *item, int i) {
 
 	// your code here
+	if (list_full(source) || !valid_index(source, i)) {
+		return false;
+	}
+	for (int j = source->count; j > i; j--) {
+		source->items[j] = source->items[j - 1];
+	}
+	source->items[i] = *item;
+	source->count++;
+	return true;
 
 }
 
@@ -91,6 +123,11 @@ bool list_insert(list_dynamic_struct *source, data_type *item, int i) {
 bool list_peek(const list_dynamic_struct *source, data_type *item) {
 
 	// your code here
+	if (list_empty(source)) {
+		return false;
+	}
+	*item = source->items[0];
+	return true;
 
 }
 
@@ -99,6 +136,12 @@ bool list_key_find(const list_dynamic_struct *source, const data_type *key,
 		data_type *item) {
 
 	// your code here
+	int index = list_linear_search(source, key);
+	if (index == -1) {
+		return false;
+	}
+	*item = source->items[index];
+	return true;
 
 }
 
@@ -107,6 +150,16 @@ bool list_key_remove(list_dynamic_struct *source, const data_type *key,
 		data_type *item) {
 
 	// your code here
+	int index = list_linear_search(source, key);
+	if (index == -1) {
+		return false;
+	}
+	*item = source->items[index];
+	for (int i = index; i < source->count - 1; i++) {
+		source->items[i] = source->items[i + 1];
+	}
+	source->count--;
+	return true;
 
 }
 
@@ -114,13 +167,14 @@ bool list_key_remove(list_dynamic_struct *source, const data_type *key,
 int list_key_index(const list_dynamic_struct *source, const data_type *key) {
 
 	// your code here
-
+	return list_linear_search(source, key);
 }
 
 // Determines if key is in a list.
 bool list_key_contains(const list_dynamic_struct *source, const data_type *key) {
 
 	// your code here
+	return list_linear_search(source, key) != -1;
 
 }
 
@@ -128,6 +182,13 @@ bool list_key_contains(const list_dynamic_struct *source, const data_type *key) 
 int list_key_count(const list_dynamic_struct *source, const data_type *key) {
 
 	// your code here
+	int count = 0;
+	for (int i = 0; i < source->count; i++) {
+		if (data_compare(&(source->items[i]), key) == 0) {
+			count++;
+		}
+	}
+	return count;
 
 }
 
@@ -135,6 +196,15 @@ int list_key_count(const list_dynamic_struct *source, const data_type *key) {
 bool list_index_remove(list_dynamic_struct *source, data_type *item, int i) {
 
 	// your code here
+	if (!valid_index(source, i)) {
+		return false;
+	}
+	*item = source->items[i];
+	for (int j = i; j < source->count - 1; j++) {
+		source->items[j] = source->items[j + 1];
+	}
+	source->count--;
+	return true;
 
 }
 
@@ -142,6 +212,16 @@ bool list_index_remove(list_dynamic_struct *source, data_type *item, int i) {
 bool list_max(const list_dynamic_struct *source, data_type *item) {
 
 	// your code here
+	if (list_empty(source)) {
+		return false;
+	}
+	*item = source->items[0];
+	for (int i = 1; i < source->count; i++) {
+		if (data_compare(&(source->items[i]), item) > 0) {
+			*item = source->items[i];
+		}
+	}
+	return true;
 
 }
 
@@ -149,6 +229,16 @@ bool list_max(const list_dynamic_struct *source, data_type *item) {
 bool list_min(const list_dynamic_struct *source, data_type *item) {
 
 	// your code here
+	if (list_empty(source)) {
+		return false;
+	}
+	*item = source->items[0];
+	for (int i = 1; i < source->count; i++) {
+		if (data_compare(&(source->items[i]), item) < 0) {
+			*item = source->items[i];
+		}
+	}
+	return true;
 
 }
 
@@ -156,7 +246,17 @@ bool list_min(const list_dynamic_struct *source, data_type *item) {
 void list_clean(list_dynamic_struct *source) {
 
 	// your code here
-
+	for (int i = 0; i < source->count; i++) {
+		for (int j = i + 1; j < source->count; j++) {
+			if (data_compare(&(source->items[i]), &(source->items[j])) == 0) {
+				for (int k = j; k < source->count - 1; k++) {
+					source->items[k] = source->items[k + 1];
+				}
+				source->count--;
+				j--;
+			}
+		}
+	}
 }
 
 // Compares two lists for equality.
@@ -164,12 +264,21 @@ bool list_equal(const list_dynamic_struct *target,
 		const list_dynamic_struct *source) {
 
 	// your code here
+	if (target->count != source->count) {
+		return false;
+	}
+	for (int i = 0; i < source->count; i++) {
+		if (data_compare(&(target->items[i]), &(source->items[i])) != 0) {
+			return false;
+		}
+	}
+	return true;
 
 }
 
 // Prints the items in a list from front to rear.
 void list_print(const list_dynamic_struct *source) {
-	// Walk through stack from top to bottom using indexes.
+// Walk through stack from top to bottom using indexes.
 	for (int i = 0; i < source->count; i++) {
 		data_print(&(source->items[i]));
 		printf("\n");

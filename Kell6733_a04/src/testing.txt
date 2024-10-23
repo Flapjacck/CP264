@@ -9,3 +9,169 @@
  *
  * -------------------------------------
  */
+-------------------------------------
+Testing stack_dynamic
+-------------------------------------
+stack_empty: true
+-------------------------------------
+stack_push
+push: 2
+push: 4
+push: 1
+push: 7
+push: 4
+push: 2
+push: 9
+push: 2
+push: 4
+push: 1
+push: 7
+push: 4
+push: 2
+push: 9
+-------------------------------------
+stack_empty: false
+-------------------------------------
+stack_peek
+item: 9
+-------------------------------------
+stack_print
+9
+2
+4
+7
+1
+4
+2
+9
+2
+4
+7
+1
+4
+2
+-------------------------------------
+stack_pop
+popped: 9
+popped: 2
+popped: 4
+popped: 7
+popped: 1
+popped: 4
+popped: 2
+popped: 9
+popped: 2
+popped: 4
+popped: 7
+popped: 1
+popped: 4
+popped: 2
+-------------------------------------
+Testing queue_dynamic
+-------------------------------------
+queue_empty: true
+-------------------------------------
+queue_enqueue
+enqueue: 2
+enqueue: 4
+enqueue: 1
+enqueue: 7
+enqueue: 4
+enqueue: 2
+enqueue: 9
+-------------------------------------
+queue_empty: false
+-------------------------------------
+queue_peek
+item: 2
+-------------------------------------
+queue_print
+2
+4
+1
+7
+4
+2
+9
+-------------------------------------
+queue_dequeue
+dequeued: 2
+dequeued: 4
+dequeued: 1
+dequeued: 7
+dequeued: 4
+dequeued: 2
+dequeued: 9
+-------------------------------------
+Testing pq_dynamic
+-------------------------------------
+pq_empty: true
+-------------------------------------
+pq_enqueue
+enqueue: 2
+enqueue: 4
+enqueue: 1
+enqueue: 7
+enqueue: 4
+enqueue: 2
+enqueue: 9
+-------------------------------------
+pq_empty: false
+-------------------------------------
+pq_peek
+item: 1
+-------------------------------------
+pq_print
+2
+4
+1
+7
+4
+2
+9
+-------------------------------------
+pq_dequeue
+dequeued: 1
+dequeued: 2
+dequeued: 2
+dequeued: 4
+dequeued: 4
+dequeued: 7
+dequeued: 9
+-------------------------------------
+Testing list_dynamic
+-------------------------------------
+list_empty: true
+-------------------------------------
+list_insert
+insert: 2
+insert: 4
+insert: 1
+insert: 7
+insert: 4
+insert: 2
+insert: 9
+-------------------------------------
+list_empty: false
+-------------------------------------
+list_peek
+item: 2
+-------------------------------------
+list_print
+2
+4
+1
+7
+4
+2
+9
+-------------------------------------
+list_remove
+removed: 2
+removed: 4
+removed: 1
+removed: 7
+removed: 4
+removed: 2
+removed: 9
+ 

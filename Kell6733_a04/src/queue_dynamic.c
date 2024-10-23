@@ -17,6 +17,16 @@
 void queue_initialize(queue_dynamic_struct **source, int capacity) {
 
 	// your code here
+	// Allocate memory for the queue structure
+	*source = (queue_dynamic_struct*) malloc(sizeof(queue_dynamic_struct));
+	// Set the initial capacity
+	(*source)->capacity = capacity;
+	// Initialize count, front, and rear
+	(*source)->count = 0;
+	(*source)->front = 0;
+	(*source)->rear = -1;
+	// Allocate memory for the items array
+	(*source)->items = (data_type*) malloc(capacity * sizeof(data_type));
 
 }
 
@@ -24,6 +34,12 @@ void queue_initialize(queue_dynamic_struct **source, int capacity) {
 void queue_destroy(queue_dynamic_struct **source) {
 
 	// your code here
+	// Free the memory allocated for the items array
+	free((*source)->items);
+	// Free the memory allocated for the queue structure
+	free(*source);
+	// Set the source pointer to NULL
+	*source = NULL;
 
 }
 
@@ -31,6 +47,8 @@ void queue_destroy(queue_dynamic_struct **source) {
 bool queue_empty(const queue_dynamic_struct *source) {
 
 	// your code here
+	// Return true if count is 0, otherwise false
+	return source->count == 0;
 
 }
 
@@ -43,6 +61,8 @@ bool queue_full(const queue_dynamic_struct *source) {
 int queue_count(const queue_dynamic_struct *source) {
 
 	// your code here
+	// Return the count of items in the queue
+	return source->count;
 
 }
 
@@ -50,7 +70,16 @@ int queue_count(const queue_dynamic_struct *source) {
 bool queue_insert(queue_dynamic_struct *source, data_type *item) {
 
 	// your code here
-
+	// Check if the queue is full
+	if (queue_full(source)) {
+		return false;
+	}
+	// Update the rear index in a circular manner
+	source->rear = (source->rear + 1) % source->capacity;
+	// Insert the item at the rear
+	source->items[source->rear] = *item;
+	// Increment the count
+	source->count++;
 	return true;
 }
 
@@ -58,6 +87,13 @@ bool queue_insert(queue_dynamic_struct *source, data_type *item) {
 bool queue_peek(const queue_dynamic_struct *source, data_type *item) {
 
 	// your code here
+	// Check if the queue is empty
+	if (queue_empty(source)) {
+		return false;
+	}
+	// Copy the item at the front to the provided item pointer
+	*item = source->items[source->front];
+	return true;
 
 }
 
@@ -65,6 +101,17 @@ bool queue_peek(const queue_dynamic_struct *source, data_type *item) {
 bool queue_remove(queue_dynamic_struct *source, data_type *item) {
 
 	// your code here
+	// Check if the queue is empty
+	if (queue_empty(source)) {
+		return false;
+	}
+	// Copy the item at the front to the provided item pointer
+	*item = source->items[source->front];
+	// Update the front index in a circular manner
+	source->front = (source->front + 1) % source->capacity;
+	// Decrement the count
+	source->count--;
+	return true;
 
 }
 
