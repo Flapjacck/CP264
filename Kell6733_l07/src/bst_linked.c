@@ -151,23 +151,23 @@ void bst_inorder(const bst_linked *source, data_ptr *items) {
 	int index = 0; // Initialize index to track the position in the items array
 
 	// Helper function to perform inorder traversal
-	void inorder_traversal(bst_node *node) {
+	void inorder_aux(bst_node *node) {
 		if (node == NULL) {
 			// Base case: if the node is NULL, return
 			return;
 		}
 		// Recursively traverse the left subtree
-		inorder_traversal(node->left);
+		inorder_aux(node->left);
 		// Copy the current node's item to the array and increment the index
 		items[index++] = node->item;
 		// Recursively traverse the right subtree
-		inorder_traversal(node->right);
+		inorder_aux(node->right);
 	}
 
 	// Start the traversal from the root
 	if (source != NULL && source->root != NULL) {
 		// Perform inorder traversal starting from the root
-		inorder_traversal(source->root);
+		inorder_aux(source->root);
 	}
 
 }
@@ -197,6 +197,27 @@ BOOLEAN bst_insert(bst_linked *source, const data_ptr item) {
 BOOLEAN bst_retrieve(bst_linked *source, const data_ptr key, data_ptr item) {
 
 	// your code here
+	// Helper function to find a node
+	bst_node* find_node(bst_node *node, const data_ptr key) {
+		if (node == NULL) {
+			return NULL;
+		} else if (data_compare(key, node->item) < 0) {
+			return find_node(node->left, key);
+		} else if (data_compare(key, node->item) > 0) {
+			return find_node(node->right, key);
+		} else {
+			return node;
+		}
+	}
+
+	if (source != NULL) {
+		bst_node *node = find_node(source->root, key);
+		if (node != NULL) {
+			data_copy(item, node->item);
+			return TRUE;
+		}
+	}
+	return FALSE;
 
 }
 
@@ -245,8 +266,19 @@ BOOLEAN bst_min(const bst_linked *source, data_ptr item) {
 int bst_leaf_count(const bst_linked *source) {
 
 	// your code here
+	// Helper function to count leaf nodes
+	int count_leaves(bst_node *node) {
+		if (node == NULL) {
+			return 0;
+		} else if (node->left == NULL && node->right == NULL) {
+			return 1;
+		} else {
+			return count_leaves(node->left) + count_leaves(node->right);
+		}
+	}
 
-	return 0;
+	// Return the count of leaf nodes in the tree by starting from the root
+	return (source != NULL) ? count_leaves(source->root) : 0;
 }
 
 // Finds the number of nodes with one child in a tree.
@@ -277,9 +309,41 @@ void bst_node_counts(const bst_linked *source, int *zero, int *one, int *two) {
 // Determines whether or not a tree is a balanced tree.
 BOOLEAN bst_balanced(const bst_linked *source) {
 
-	// your code here
+	// Helper function to check if a tree is balanced
+	int check_balance(bst_node *node) {
+		// Base case: If the node is NULL, the height is 0
+		if (node == NULL) {
+			return 0;
+		}
 
-	return FALSE;
+		// Recursively check the balance of the left subtree
+		int left_height = check_balance(node->left);
+
+		// Recursively check the balance of the right subtree
+		int right_height = check_balance(node->right);
+
+		// If either subtree is unbalanced, propagate the -1 upwards
+		if (left_height == -1 || right_height == -1) {
+			return -1;
+		}
+
+		// If the current node is unbalanced (height difference > 1), return -1
+		if (abs(left_height - right_height) > 1) {
+			return -1;
+		}
+
+		// Calculate the height of the current node
+		int current_height = 1
+				+ (left_height > right_height ? left_height : right_height);
+
+		// Return the height of the current node
+		return current_height;
+	}
+
+	// Check if the BST is balanced by calling the helper function
+	// If the helper function returns -1, the tree is unbalanced
+	// If the helper function returns any non-negative value, the tree is balanced
+	return (source != NULL && check_balance(source->root) != -1);
 }
 
 // Determines whether or not a tree is a valid BST.
