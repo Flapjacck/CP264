@@ -148,6 +148,27 @@ int bst_count(const bst_linked *source) {
 void bst_inorder(const bst_linked *source, data_ptr *items) {
 
 	// your code here
+	int index = 0; // Initialize index to track the position in the items array
+
+	// Helper function to perform inorder traversal
+	void inorder_traversal(bst_node *node) {
+		if (node == NULL) {
+			// Base case: if the node is NULL, return
+			return;
+		}
+		// Recursively traverse the left subtree
+		inorder_traversal(node->left);
+		// Copy the current node's item to the array and increment the index
+		items[index++] = node->item;
+		// Recursively traverse the right subtree
+		inorder_traversal(node->right);
+	}
+
+	// Start the traversal from the root
+	if (source != NULL && source->root != NULL) {
+		// Perform inorder traversal starting from the root
+		inorder_traversal(source->root);
+	}
 
 }
 
@@ -177,7 +198,6 @@ BOOLEAN bst_retrieve(bst_linked *source, const data_ptr key, data_ptr item) {
 
 	// your code here
 
-	return FALSE;
 }
 
 // Removes a value matching key in a BST.
