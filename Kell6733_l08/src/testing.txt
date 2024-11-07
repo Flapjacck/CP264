@@ -9,3 +9,28 @@
  *
  * -------------------------------------
  */
+empty: TRUE
+full:  FALSE
+count: 0
+Insert test values:
+  count: 8, height: 4, items:
+9
+7
+6
+8
+12
+11
+15
+18
+
+empty: FALSE
+inorder:   {6, 7, 8, 9, 11, 12, 15, 18, }
+valid: AVL_VALID
+valid: AVL_HEIGHT_VIOLATION
+valid: AVL_BAD_CHILDREN
+valid: AVL_NOT_BALANCED
+Remove 11:
+  removed: 11
+inorder:  {6, 7, 8, 9, 11, 12, 15, 18, }
+Destroy the AVL
+ 
