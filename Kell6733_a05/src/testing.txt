@@ -9,3 +9,102 @@
  *
  * -------------------------------------
  */
+ 
+ ------------
+List testing
+------------
+Initialize list
+list empty: TRUE
+list count: 0
+
+Append data to list:
+  Appended: 5
+  Appended: 3
+  Appended: 7
+  Appended: 1
+  Appended: 5
+  Appended: 8
+  Appended: 3
+List after appending:
+5
+3
+7
+1
+5
+8
+3
+
+Inserted 99 at index 3.
+List after inserting:
+5
+3
+7
+99
+1
+5
+8
+3
+
+Removed item: 99
+List after removing by key:
+5
+3
+7
+1
+5
+8
+3
+
+Found item: 1
+
+Max item: 8
+Min item: 1
+
+Removing duplicates from the list.
+List after removing duplicates:
+5
+3
+7
+1
+8
+
+Copying the list.
+Contents of copied list:
+5
+3
+7
+1
+8
+
+Lists equal: TRUE
+
+Remove front of target1.
+Removed item: 5
+
+Lists equal: FALSE
+
+Split list alternating.
+Contents of source list:
+5
+3
+7
+1
+8
+Contents of target1 list:
+5
+7
+8
+Contents of target2 list:
+3
+1
+
+Combine target lists back to source.
+Contents of recombined list:
+5
+7
+8
+3
+1
+
+list freed: 0000000000000000
+ 
