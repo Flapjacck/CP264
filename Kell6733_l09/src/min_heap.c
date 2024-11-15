@@ -41,7 +41,20 @@ static void heap_swap(int *a, int *b) {
 static void heapify_up(min_heap *source) {
 
 	// your code here
-
+	// start with the last element
+	int index = source->count - 1;
+	while (index > 0) {
+		// calculate the parent index
+		int parent = (index - 1) / 2;
+		// if the current value is greater than or equal to the parent, stop
+		if (source->values[index] >= source->values[parent]) {
+			break;
+		}
+		// swap the current value with the parent
+		heap_swap(&source->values[index], &source->values[parent]);
+		// move up to the parent index
+		index = parent;
+	}
 	return;
 }
 
@@ -53,7 +66,30 @@ static void heapify_up(min_heap *source) {
 static void heapify_down(min_heap *source) {
 
 	// your code here
-
+	// start with the root element
+	int index = 0;
+	// while there is at least one child
+	while (2 * index + 1 < source->count) {
+		// calculate the left child index
+		int left = 2 * index + 1;
+		// calculate the right child index
+		int right = 2 * index + 2;
+		// assume the left child is the smallest
+		int smallest = left;
+		// if the right child is smaller, update smallest
+		if (right < source->count
+				&& source->values[right] < source->values[left]) {
+			smallest = right;
+		}
+		// if the current value is less than or equal to the smallest child, stop
+		if (source->values[index] <= source->values[smallest]) {
+			break;
+		}
+		// swap the current value with the smallest child
+		heap_swap(&source->values[index], &source->values[smallest]);
+		// move down to the smallest child index
+		index = smallest;
+	}
 	return;
 }
 
@@ -68,10 +104,16 @@ min_heap* min_heap_initialize(int capacity) {
 }
 
 void min_heap_free(min_heap **source) {
-	free((*source)->values);
-	free(*source);
-	*source = NULL;
-	return;
+	if (source && *source) {
+		if ((*source)->values) {
+			free((*source)->values);
+			// Set the values pointer to NULL after freeing
+			(*source)->values = NULL;
+		}
+		free(*source);
+		// Set the source pointer to NULL after freeing
+		*source = NULL;
+	}
 }
 
 void min_heap_heapify(min_heap *source, int *keys, int count) {
@@ -123,8 +165,24 @@ int min_heap_remove(min_heap *source) {
 int min_heap_valid(const min_heap *source) {
 
 	// your code here
-
-	return 0;
+	// check each parent node
+	for (int i = 0; i < source->count / 2; i++) {
+		// calculate the left child index
+		int left = 2 * i + 1;
+		// calculate the right child index
+		int right = 2 * i + 2;
+		// if the parent is greater than the left child, the heap is invalid
+		if (left < source->count && source->values[i] > source->values[left]) {
+			return 0;
+		}
+		// if the parent is greater than the right child, the heap is invalid
+		if (right < source->count
+				&& source->values[i] > source->values[right]) {
+			return 0;
+		}
+	}
+	// the heap is valid
+	return 1;
 }
 
 int min_heap_replace(min_heap *source, int replacement) {
@@ -137,7 +195,18 @@ int min_heap_replace(min_heap *source, int replacement) {
 void heap_sort(int *values, int count) {
 
 	// your code here
-
+	// initialize a new heap
+	min_heap *heap = min_heap_initialize(count);
+	for (int i = 0; i < count; i++) {
+		// insert all values into the heap
+		min_heap_insert(heap, values[i]);
+	}
+	for (int i = 0; i < count; i++) {
+		// remove values from the heap in sorted order
+		values[i] = min_heap_remove(heap);
+	}
+	// free the heap
+	min_heap_free(&heap);
 	return;
 }
 

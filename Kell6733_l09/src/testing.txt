@@ -9,3 +9,34 @@
  *
  * -------------------------------------
  */
+Insert test values into heap:
+  insert: 11
+  insert: 7
+  insert: 15
+  insert: 6
+  insert: 9
+  insert: 12
+  insert: 18
+  insert: 8
+{6, 7, 12, 8, 9, 15, 18, 11, }
+Heap valid: 1
+------------------------------------------------
+Remove all data from heap:
+6, 7, 8, 9, 11, 12, 15, 18, 
+------------------------------------------------
+Use heapify with data
+Contents of heap in level order:
+{6, 7, 12, 8, 9, 15, 18, 11, }
+------------------------------------------------
+Call replace on root node
+Replacement value: 13
+Replaced (root) value: 6
+Contents of heap in level order:
+{7, 8, 12, 11, 9, 15, 18, 13, }
+------------------------------------------------
+Heap valid: 1
+Free the heap
+------------------------------------------------
+Heap Sort:
+after sorting: {6, 7, 8, 9, 11, 12, 15, 18, }
+ 
