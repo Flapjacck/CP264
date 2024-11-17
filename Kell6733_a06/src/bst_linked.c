@@ -118,9 +118,22 @@ bst_linked* bst_initialize() {
 void bst_free(bst_linked **source) {
 
 	// your code here
-	free(*source);
-
-	return;
+	if (source != NULL && *source != NULL) {
+		// Helper function to free nodes recursively
+		void free_nodes(bst_node *node) {
+			if (node != NULL) {
+				free_nodes(node->left);
+				free_nodes(node->right);
+				data_free(&node->item);
+				free(node);
+			}
+		}
+		// Free all nodes starting from the root
+		free_nodes((*source)->root);
+		// Free the BST structure itself
+		free(*source);
+		*source = NULL;
+	}
 }
 
 // Determines if a BST is empty.
@@ -176,16 +189,54 @@ void bst_inorder(const bst_linked *source, data_ptr *items) {
 void bst_preorder(const bst_linked *source, data_ptr *items) {
 
 	// your code here
+	int index = 0; // Initialize index to track the position in the items array
 
-	return;
+	// Helper function to perform preorder traversal
+	void preorder_aux(bst_node *node) {
+		if (node == NULL) {
+			// Base case: if the node is NULL, return
+			return;
+		}
+		// Copy the current node's item to the array and increment the index
+		items[index++] = node->item;
+		// Recursively traverse the left subtree
+		preorder_aux(node->left);
+		// Recursively traverse the right subtree
+		preorder_aux(node->right);
+	}
+
+	// Start the traversal from the root
+	if (source != NULL && source->root != NULL) {
+		// Perform preorder traversal starting from the root
+		preorder_aux(source->root);
+	}
 }
 
 // Copies the contents of a BST to an array in postorder.
 void bst_postorder(const bst_linked *source, data_ptr *items) {
 
 	// your code here
+	int index = 0; // Initialize index to track the position in the items array
 
-	return;
+	// Helper function to perform postorder traversal
+	void postorder_aux(bst_node *node) {
+		if (node == NULL) {
+			// Base case: if the node is NULL, return
+			return;
+		}
+		// Recursively traverse the left subtree
+		postorder_aux(node->left);
+		// Recursively traverse the right subtree
+		postorder_aux(node->right);
+		// Copy the current node's item to the array and increment the index
+		items[index++] = node->item;
+	}
+
+	// Start the traversal from the root
+	if (source != NULL && source->root != NULL) {
+		// Perform postorder traversal starting from the root
+		postorder_aux(source->root);
+	}
 }
 
 // Inserts a copy of an item into a BST.
@@ -258,8 +309,18 @@ BOOLEAN bst_max(const bst_linked *source, data_ptr item) {
 BOOLEAN bst_min(const bst_linked *source, data_ptr item) {
 
 	// your code here
+	if (source->root == NULL) {
+		return FALSE;
+	}
 
-	return FALSE;
+	// Traverse to the leftmost node.
+	bst_node *current = source->root;
+	while (current->left != NULL) {
+		current = current->left;
+	}
+
+	data_copy(item, current->item);
+	return TRUE;
 }
 
 // Finds the number of leaf nodes in a tree.
