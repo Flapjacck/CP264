@@ -276,15 +276,93 @@ BOOLEAN bst_retrieve(bst_linked *source, const data_ptr key, data_ptr item) {
 BOOLEAN bst_remove(bst_linked *source, const data_ptr key, data_ptr item) {
 
 	// your code here
+	BOOLEAN removed = FALSE;
+	// Check if the source tree is not NULL.
+	if (source != NULL) {
+		bst_node **node = &(source->root);
+		// Iterate through the tree nodes.
+		while (*node != NULL) {
+			// Compare the key with the current node's item.
+			int comp = data_compare(key, (*node)->item);
+			if (comp < 0) {
+				// If the key is less than the current node's item, move to the left subtree.
+				node = &((*node)->left);
+			} else if (comp > 0) {
+				// If the key is greater than the current node's item, move to the right subtree.
+				node = &((*node)->right);
+			} else {
+				// Key matches the current node's item, set removed to TRUE and copy the item to the output parameter.
+				removed = TRUE;
+				data_copy(item, (*node)->item);
+				if ((*node)->left == NULL) {
+					// Node with only right child or no child.
+					bst_node *right = (*node)->right;
+					data_free(&((*node)->item));
+					free(*node);
+					*node = right;
+				} else if ((*node)->right == NULL) {
+					// Node with only left child.
+					bst_node *left = (*node)->left;
+					data_free(&((*node)->item));
+					free(*node);
+					*node = left;
+				} else {
+					// Node with two children: find the inorder successor (smallest in the right subtree).
+					bst_node **min_node = &((*node)->right);
+					while ((*min_node)->left != NULL) {
+						min_node = &((*min_node)->left);
+					}
+					// Copy the inorder successor's item to the current node and remove the inorder successor.
+					data_copy((*node)->item, (*min_node)->item);
+					bst_node *right = (*min_node)->right;
+					data_free(&((*min_node)->item));
+					free(*min_node);
+					*min_node = right;
+				}
+				break;
+			}
+		}
+		// If a node was removed, decrement the count.
+		if (removed) {
+			source->count -= 1;
+		}
+	}
+	// Return whether a node was removed.
+	return removed;
+}
 
-	return FALSE;
+// Aux function to recursively copy a binary search tree node.
+static bst_node* bst_copy_aux(const bst_node *node) {
+	// Base case: if the node is NULL, return NULL.
+	if (node == NULL) {
+		return NULL;
+	}
+	// Allocate memory for the new node.
+	bst_node *new_node = malloc(sizeof *new_node);
+	// Allocate memory for the new node's item and copy the item from the original node.
+	new_node->item = malloc(sizeof *new_node->item);
+	data_copy(new_node->item, node->item);
+	// Copy the height from the original node.
+	new_node->height = node->height;
+	// Recursively copy the left and right subtrees.
+	new_node->left = bst_copy_aux(node->left);
+	new_node->right = bst_copy_aux(node->right);
+	// Return the new node.
+	return new_node;
 }
 
 // Copies source to target.
 void bst_copy(bst_linked **target, const bst_linked *source) {
 
 	// your code here
-
+	// If the source tree is not NULL, initialize the target tree.
+	if (source != NULL) {
+		*target = bst_initialize();
+		// Copy the count of nodes from the source tree.
+		(*target)->count = source->count;
+		// Copy the root node and its subtrees using the helper function.
+		(*target)->root = bst_copy_aux(source->root);
+	}
 }
 
 // Finds the maximum item in a BST.
@@ -346,16 +424,57 @@ int bst_leaf_count(const bst_linked *source) {
 int bst_one_child_count(const bst_linked *source) {
 
 	// your code here
-
-	return 0;
+	int count = 0;
+	// Check if the source tree is not NULL.
+	if (source != NULL) {
+		bst_node *node = source->root;
+		// Iterate through the tree nodes.
+		while (node != NULL) {
+			// If the node has exactly one child, increment the count.
+			if ((node->left == NULL && node->right != NULL)
+					|| (node->left != NULL && node->right == NULL)) {
+				count++;
+			}
+			// Move to the left or right child if they exist, otherwise break the loop.
+			if (node->left != NULL) {
+				node = node->left;
+			} else if (node->right != NULL) {
+				node = node->right;
+			} else {
+				break;
+			}
+		}
+	}
+	// Return the count of nodes with one child.
+	return count;
 }
 
 // Finds the number of nodes with two children in a tree.
 int bst_two_child_count(const bst_linked *source) {
 
 	// your code here
-
-	return 0;
+	int count = 0;
+	// Check if the source tree is not NULL.
+	if (source != NULL) {
+		bst_node *node = source->root;
+		// Iterate through the tree nodes.
+		while (node != NULL) {
+			// If the node has two children, increment the count.
+			if (node->left != NULL && node->right != NULL) {
+				count++;
+			}
+			// Move to the left or right child if they exist, otherwise break the loop.
+			if (node->left != NULL) {
+				node = node->left;
+			} else if (node->right != NULL) {
+				node = node->right;
+			} else {
+				break;
+			}
+		}
+	}
+	// Return the count of nodes with two children.
+	return count;
 }
 
 // Determines the number of nodes with zero, one, and two children.
@@ -363,8 +482,33 @@ int bst_two_child_count(const bst_linked *source) {
 void bst_node_counts(const bst_linked *source, int *zero, int *one, int *two) {
 
 	// your code here
-
-	return;
+	if (source != NULL) {
+		// Initialize the counts for nodes with zero, one, and two children to zero.
+		*zero = *one = *two = 0;
+		bst_node *node = source->root;
+		// Iterate through the tree nodes.
+		while (node != NULL) {
+			// If the node has no children, increment the zero children count.
+			if (node->left == NULL && node->right == NULL) {
+				(*zero)++;
+				// If the node has exactly one child, increment the one child count.
+			} else if ((node->left == NULL && node->right != NULL)
+					|| (node->left != NULL && node->right == NULL)) {
+				(*one)++;
+				// If the node has two children, increment the two children count.
+			} else {
+				(*two)++;
+			}
+			// Move to the left or right child if they exist, otherwise break the loop.
+			if (node->left != NULL) {
+				node = node->left;
+			} else if (node->right != NULL) {
+				node = node->right;
+			} else {
+				break;
+			}
+		}
+	}
 }
 
 // Determines whether or not a tree is a balanced tree.
@@ -411,16 +555,65 @@ BOOLEAN bst_balanced(const bst_linked *source) {
 BOOLEAN bst_valid(const bst_linked *source) {
 
 	// your code here
-
-	return FALSE;
+	// If the source tree is NULL, it is considered valid.
+	if (source == NULL) {
+		return TRUE;
+	}
+	bst_node *node = source->root;
+	data_ptr min = NULL, max = NULL;
+	// Iterate through the tree nodes.
+	while (node != NULL) {
+		// Check if the current node's item violates the BST properties.
+		if ((min != NULL && data_compare(node->item, min) <= 0)
+				|| (max != NULL && data_compare(node->item, max) >= 0)) {
+			return FALSE;
+		}
+		// Move to the left or right child and update the min or max values.
+		if (node->left != NULL) {
+			max = node->item;
+			node = node->left;
+		} else if (node->right != NULL) {
+			min = node->item;
+			node = node->right;
+		} else {
+			break;
+		}
+	}
+	// If no violations are found, the tree is valid.
+	return TRUE;
 }
 
 // Determines if two trees contain same data in same configuration.
 BOOLEAN bst_equals(const bst_linked *target, const bst_linked *source) {
 
 	// your code here
-
-	return FALSE;
+	// If either tree is NULL, they are not equal.
+	if (target == NULL || source == NULL) {
+		return FALSE;
+	}
+	bst_node *node1 = target->root;
+	bst_node *node2 = source->root;
+	// Iterate through the tree nodes.
+	while (node1 != NULL && node2 != NULL) {
+		// If the current nodes' items are not equal, return FALSE.
+		if (data_compare(node1->item, node2->item) != 0) {
+			return FALSE;
+		}
+		// Move to the left children if both nodes have left children.
+		if (node1->left != NULL && node2->left != NULL) {
+			node1 = node1->left;
+			node2 = node2->left;
+			// Move to the right children if both nodes have right children.
+		} else if (node1->right != NULL && node2->right != NULL) {
+			node1 = node1->right;
+			node2 = node2->right;
+		} else {
+			// If the structure is not identical, break the loop.
+			break;
+		}
+	}
+	// Return TRUE if both nodes are NULL, indicating both trees are equal.
+	return node1 == NULL && node2 == NULL;
 }
 
 /**
