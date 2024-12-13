@@ -1,16 +1,3 @@
-/*
- -------------------------------------
- File:    Q1.c
- Project: Exam_Prep_Questions
- file description
- -------------------------------------
- Author:  Spencer Kelly
- ID:      169066733
- Email:   Kell6733@mylaurier.ca
- Version  2024-12-11
- -------------------------------------
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 
