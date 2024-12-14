@@ -39,3 +39,25 @@ int isAVL(TreeNode* root) {
     return isBalanced(root);
 }
 ```
+
+## Main File
+
+```c
+int main() {
+    // Create a sample tree
+    TreeNode* root = createNode(10);
+    root->left = createNode(5);
+    root->right = createNode(15);
+    root->left->left = createNode(2);
+    root->left->right = createNode(7);
+
+    // Test the isAVL function
+    if (isAVL(root)) {
+        printf("The tree is an AVL tree.\n");
+    } else {
+        printf("The tree is not an AVL tree.\n");
+    }
+
+    return 0;
+}
+```

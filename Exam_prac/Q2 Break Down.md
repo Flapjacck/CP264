@@ -68,3 +68,32 @@ int countLeaves(TreeNode* root) {
     return countLeaves(root->left) + countLeaves(root->right);
 }
 ```
+
+## Main Files
+
+```c
+int main() {
+    // Create a sample binary tree
+    TreeNode* root = createNode(1);
+    root->left = createNode(2);
+    root->right = createNode(3);
+    root->left->left = createNode(4);
+    root->left->right = createNode(5);
+    root->right->left = createNode(6);
+    root->right->right = createNode(7);
+
+    printf("BFS Traversal (Level-Order):\n");
+    bfsTraversal(root);
+
+    int totalNodes = countNodes(root);
+    printf("\nTotal Number of Nodes: %d\n", totalNodes);
+
+    int treeHeight = height(root);
+    printf("Height of the Tree: %d\n", treeHeight);
+
+    int totalLeaves = countLeaves(root);
+    printf("Number of Leaves: %d\n", totalLeaves);
+
+    return 0;
+}
+```

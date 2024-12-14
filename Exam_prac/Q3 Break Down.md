@@ -103,3 +103,26 @@ AVLNode* insert(AVLNode* root, int value) {
     return root; // Return the unchanged node if no rotation is needed
 }
 ```
+
+## Main File
+
+```c
+int main() {
+    AVLNode* root = NULL;
+
+    // Insert elements into the AVL tree
+    root = insert(root, 10);
+    root = insert(root, 20);
+    root = insert(root, 30);
+    root = insert(root, 40);
+    root = insert(root, 50);
+    root = insert(root, 25);
+
+    // Print the in-order traversal of the AVL tree
+    printf("In-order traversal of the AVL tree: ");
+    inOrderTraversal(root);
+    printf("\n");
+
+    return 0;
+}
+```

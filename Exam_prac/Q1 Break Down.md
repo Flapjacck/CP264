@@ -207,3 +207,37 @@ void deleteDoubly(DoublyNode **head, int position) {
 	free(temp);
 }
 ```
+
+## Main File
+
+```c
+int main() {
+	// Singly linked list example
+	SinglyNode *singlyHead = NULL;
+	insertSingly(&singlyHead, 10, 1);
+	insertSingly(&singlyHead, 20, 2);
+	insertSingly(&singlyHead, 30, 3);
+	printf("Singly Linked List: ");
+	displaySingly(singlyHead);
+	printf("Search for 20 in Singly Linked List: Position = %d\n",
+			searchSingly(singlyHead, 20));
+	deleteSingly(&singlyHead, 2);
+	printf("After deleting position 2: ");
+	displaySingly(singlyHead);
+
+	// Doubly linked list example
+	DoublyNode *doublyHead = NULL;
+	insertDoubly(&doublyHead, 100, 1);
+	insertDoubly(&doublyHead, 200, 2);
+	insertDoubly(&doublyHead, 300, 3);
+	printf("Doubly Linked List: ");
+	displayDoubly(doublyHead);
+	printf("Search for 200 in Doubly Linked List: Position = %d\n",
+			searchDoubly(doublyHead, 200));
+	deleteDoubly(&doublyHead, 2);
+	printf("After deleting position 2: ");
+	displayDoubly(doublyHead);
+
+	return 0;
+}
+```
