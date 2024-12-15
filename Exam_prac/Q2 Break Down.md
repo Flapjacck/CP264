@@ -69,7 +69,7 @@ int countLeaves(TreeNode* root) {
 }
 ```
 
-## Main Files
+## Main File
 
 ```c
 int main() {
