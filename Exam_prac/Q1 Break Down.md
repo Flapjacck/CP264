@@ -42,7 +42,7 @@ int searchDoubly(DoublyNode *head, int value) {
 			return position;
 		}
 		current = current->next;
-		position++;s
+		position++;
 	}
 	return -1; // Element not found
 }
